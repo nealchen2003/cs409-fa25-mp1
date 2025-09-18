@@ -1,1 +1,275 @@
 /* Your SCSS here. */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#header {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.5s;
+}
+
+#header.scrolled {
+    padding: 10px 0;
+}
+
+#navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#navbar .logo {
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+    transition: font-size 0.5s;
+}
+
+#navbar.scrolled .logo {
+    font-size: 20px;
+}
+
+#navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#navbar ul li {
+    margin-left: 20px;
+}
+
+#navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: font-size 0.5s;
+}
+
+#navbar.scrolled ul li a {
+    font-size: 16px;
+}
+
+#navbar ul li a.active {
+    color: #f0a500; /* Highlight color */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.stripe {
+    padding: 100px 0;
+    text-align: center;
+}
+
+#home {
+    background: #f4f4f4;
+    padding-top: 140px; /* Adjust for fixed navbar */
+}
+
+#footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.carousel {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    position: relative;
+}
+
+.carousel-item img {
+    width: 100%;
+    display: block;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.multi-column-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.v-center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.stripe .content {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#bg-image-section {
+    background-image: url('../assets/image.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1001; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#video-section video {
+    width: 100%;
+    max-width: 800px;
+}
+
+.stripe h2 {
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.social-icons {
+    margin-bottom: 10px;
+}
+
+.social-icon {
+    color: white;
+    margin: 0 10px;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+@media (max-width: 1366px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 1024px) {
+    #navbar ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    #navbar ul li {
+        margin: 10px 0;
+    }
+
+    .multi-column-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    #navbar .container {
+        flex-direction: column;
+    }
+}
+
