@@ -141,20 +141,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Modal
 const modal = document.getElementById("myModal");
-const btn = document.getElementById("modalBtn");
-const span = document.getElementsByClassName("close")[0];
+const modalTrigger = document.querySelector(".modal-trigger");
 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-span.onclick = function() {
-  modal.style.display = "none";
+modalTrigger.onclick = function() {
+  modal.classList.add("show");
 }
 
 window.onclick = function(event) {
   if (event.target == modal) {
-    modal.style.display = "none";
+    modal.classList.remove("show");
   }
 }
 

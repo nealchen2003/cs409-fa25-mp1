@@ -94,14 +94,22 @@
         <section id="modal-section" class="stripe">
             <div class="content">
                 <h2>Modal</h2>
-                <button id="modalBtn">Open Modal</button>
+                <div class="modal-trigger">
+                    <img src="assets/image.jpg" alt="Click to view larger" class="modal-image">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
             </div>
         </section>
 
         <div id="myModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
+                <img src="assets/image.jpg" alt="Large view" class="modal-large-image">
+                <div class="modal-text">
+                    <h3>Beautiful Landscape</h3>
+                    <p>This stunning image showcases the beauty of nature. Click anywhere outside this modal to close it.</p>
+                </div>
             </div>
         </div>
 
