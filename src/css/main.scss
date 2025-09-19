@@ -277,6 +277,14 @@ html {
 }
 
 @media (max-width: 1024px) {
+    // Multi-column layout remains horizontal at 1024px
+}
+
+@media (max-width: 768px) {
+    #navbar .container {
+        flex-direction: column;
+    }
+
     #navbar ul {
         flex-direction: column;
         align-items: center;
@@ -288,12 +296,6 @@ html {
     }
 
     .multi-column-container {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 768px) {
-    #navbar .container {
         flex-direction: column;
     }
 }
