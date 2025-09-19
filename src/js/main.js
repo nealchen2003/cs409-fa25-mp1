@@ -17,22 +17,28 @@ window.addEventListener('scroll', () => {
     const navLinks = document.querySelectorAll('#navbar ul li a');
     let currentSection = '';
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - navbar.offsetHeight;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-            currentSection = section.getAttribute('id');
-        }
-    });
-    
     // Highlight last menu item when at the bottom
-    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-        currentSection = sections[sections.length - 1].getAttribute('id');
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) { // Use a small tolerance
+        const lastNavigableSection = Array.from(sections).reverse().find(section => {
+            return document.querySelector(`#navbar ul li a[href="#${section.id}"]`);
+        });
+        if (lastNavigableSection) {
+            currentSection = lastNavigableSection.id;
+        }
+    } else {
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - navbar.offsetHeight;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
+            }
+        });
     }
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === currentSection) {
+        const linkHref = link.getAttribute('href');
+        if (linkHref && linkHref.substring(1) === currentSection) {
             link.classList.add('active');
         }
     });
