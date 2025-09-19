@@ -56,22 +56,88 @@ document.querySelectorAll('#navbar a').forEach(anchor => {
 });
 
 // Carousel JavaScript
-let slideIndex = 0;
-showSlides(slideIndex);
+document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector(".carousel");
+    if (!carousel || carousel.dataset.initialized) {
+        return;
+    }
+    carousel.dataset.initialized = 'true';
 
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
+    const carouselInner = carousel.querySelector(".carousel-inner");
+    const slides = carousel.getElementsByClassName("carousel-item");
+    const dotsContainer = carousel.parentElement.querySelector(".carousel-dots");
+    const numSlides = slides.length;
 
-function showSlides(n) {
-    let i;
-    const slides = document.getElementsByClassName("carousel-item");
-    const carouselInner = document.querySelector(".carousel-inner");
-    if (n >= slides.length) { slideIndex = 0; }
-    if (n < 0) { slideIndex = slides.length - 1; }
-    
-    carouselInner.style.transform = `translateX(-${slideIndex * 100}%)`;
-}
+    if (numSlides === 0) return;
+
+    // Create dots
+    for (let i = 0; i < numSlides; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dot.addEventListener('click', () => {
+            slideIndex = i + 1;
+            moveToSlide();
+            updateDots();
+        });
+        dotsContainer.appendChild(dot);
+    }
+    const dots = dotsContainer.getElementsByClassName('dot');
+
+    const updateDots = () => {
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.remove('active');
+        }
+        // The active dot should correspond to the "real" slide index
+        let activeDotIndex = (slideIndex - 1 + numSlides) % numSlides;
+        dots[activeDotIndex].classList.add('active');
+    };
+
+    // Clone first and last slides for infinite loop effect
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[numSlides - 1].cloneNode(true);
+    carouselInner.appendChild(firstClone);
+    carouselInner.insertBefore(lastClone, slides[0]);
+
+    let slideIndex = 1; // Start on the first "real" slide, not the clone
+
+    const moveToSlide = () => {
+        carouselInner.style.transform = `translateX(-${slideIndex * 100}%)`;
+        updateDots();
+    };
+
+    // Initialize position without animation
+    carouselInner.style.transition = 'none';
+    moveToSlide();
+
+    // Use a small timeout to ensure the initial position is set before enabling transitions
+    setTimeout(() => {
+        carouselInner.style.transition = 'transform 0.5s ease-in-out';
+    }, 50);
+
+
+    window.plusSlides = (n) => {
+        slideIndex += n;
+        carouselInner.style.transition = 'transform 0.5s ease-in-out';
+        moveToSlide();
+    };
+
+    carouselInner.addEventListener('transitionend', () => {
+        updateDots();
+        // After transitioning to the cloned last slide, jump to the real last slide
+        if (slideIndex === 0) {
+            carouselInner.style.transition = 'none';
+            slideIndex = numSlides;
+            moveToSlide();
+        }
+        // After transitioning to the cloned first slide, jump to the real first slide
+        if (slideIndex === numSlides + 1) {
+            carouselInner.style.transition = 'none';
+            slideIndex = 1;
+            moveToSlide();
+        }
+    });
+});
+
 
 // Modal
 const modal = document.getElementById("myModal");
